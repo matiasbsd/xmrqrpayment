@@ -1,4 +1,5 @@
 Script para generar un código de pago QR en Monero y enviarlo via correo.
+
 Programado por Matias Colli <matiasbsd@gmail.com>
 
 1. Tomará como parámetro el monto en pesos argentinos y obtendrá de la API de Binance la cotización actual.
