@@ -7,6 +7,7 @@ Programado por Matias Colli <matiasbsd@gmail.com>
 3. Enviará en formato HTML via mail el código QR generado en forma de ticket de pago.
 
 Ejecución:
+
 ![image](https://github.com/matiasbsd/xmrqrpayment/assets/135914624/70c95378-6de8-405c-89da-7fb2fcc6802f)
 
 Muestra en texto:
