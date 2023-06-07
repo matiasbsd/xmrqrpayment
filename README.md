@@ -12,11 +12,17 @@ Ejecución:
 
 Muestra en texto:
 $ ./payment.py 40000
+
 El precio de XMR hoy es $69451.2
+
 La cantidad de XMR a transferir son 0.575944
+
 Pago en XMR de mayo
+
 07-06-2023
+
 La imagen del QR se cargó correctamente en ImgBB.
+
 El correo se envió correctamente.
 
 Una muestra de un correo enviado con el script:
