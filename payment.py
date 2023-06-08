@@ -4,6 +4,7 @@
 # Version 0.1
 # Creado el 7-06-2023
 
+########################## DATOS PERSONALES #############################
 # Dirección de Monero (XMR) para recibir los fondos
 address = "4ANUF...."
 
@@ -20,12 +21,13 @@ msg_cc = "zzzzzz@gmail.com"
 
 # Api Key de Image BB
 imagebb_apikey = "YOUR_API_KEY_IMGBB"
+######################## FIN DATOS PERSONALES ###########################
 
 # Cargar librerías básicas
 import sys
 import importlib
 
-# Verificar la disponibilidad de las librerías requeridas
+# Verificar la disponibilidad de las otras librerías requeridas
 required_libraries = ["sys", "smtplib", "qrcode", "requests", "tempfile",
                       "email.mime.multipart", "email.mime.text",
                       "urllib.request", "calendar", "datetime"]
@@ -35,7 +37,6 @@ for lib in required_libraries:
         importlib.import_module(lib)
     except ImportError:
         missing_libraries.append(lib)
-
 if missing_libraries:
     print("Las siguientes librerías son requeridas pero no están instaladas:")
     for lib in missing_libraries:
@@ -65,40 +66,31 @@ def has_internet_connection():
     except:
         return False
 
+# Obtener el precio del par XMRARS
 def convert_ars_to_xmr(amount_ars):
-    # Obtén el ticker del par USDTARS
+    # Obtener el precio del par USDTARS
     response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=USDTARS')
     data = response.json()
     usdtars_price = float(data['price'])
-
-    # Obtener el ticker del par XMRUSDT
+    # Obtener el precio del par XMRUSDT
     response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=XMRUSDT')
     data = response.json()
     xmrusdt_price = float(data['price'])
-
     # Calcula la cantidad equivalente de XMR en base al monto en pesos argentinos
     xmramount = amount_ars / (usdtars_price * xmrusdt_price)
-
     return xmramount
 
+# Obtener el precio del par USDTARS
 def usdtars_price():
-    # Obtén el precio del par USDTARS
     response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=USDTARS')
     data = response.json()
     return float(data['price'])
 
+# Obtener el precio del par XMRUSDT
 def xmrusdt_price():
-    # Obtener el precio del par XMRUSDT
     response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=XMRUSDT')
     data = response.json()
     return float(data['price'])
-
-# Verificar el número de argumentos
-if len(sys.argv) < 2:
-    print("Debes proporcionar un número como argumento.")
-    print("Uso: " + str(sys.argv[0]) + " <monto>")
-    print("Ejemplo: " + str(sys.argv[0]) + " 40000")
-    exit(1)
 
 # Verificar si se proporciona un monto personalizado como argumento
 if len(sys.argv) > 1:
