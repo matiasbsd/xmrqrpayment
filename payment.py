@@ -139,7 +139,6 @@ meses_espanol = {
     "November": "noviembre",
     "December": "diciembre"
 }
-
 nombre_mes_anterior = meses_espanol[english_month_name]
 
 # Configurar el asunto personalizado
@@ -165,7 +164,6 @@ qr_code = qrcode.QRCode(
 )
 qr_code.add_data(qr_data)
 qr_code.make(fit=True)
-
 qr_image = qr_code.make_image(fill_color="black", back_color="white")
 
 # Guardar el código QR en un archivo temporal
