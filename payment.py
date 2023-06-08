@@ -70,7 +70,7 @@ def convert_ars_to_xmr(amount_ars):
     data = response.json()
     usdtars_price = float(data['price'])
 
-    # Obtén el ticker del par XMRUSDT
+    # Obtener el ticker del par XMRUSDT
     response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=XMRUSDT')
     data = response.json()
     xmrusdt_price = float(data['price'])
@@ -81,13 +81,13 @@ def convert_ars_to_xmr(amount_ars):
     return xmramount
 
 def usdtars_price():
-    # Obtén el ticker del par USDTARS
+    # Obtén el precio del par USDTARS
     response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=USDTARS')
     data = response.json()
     return float(data['price'])
 
 def xmrusdt_price():
-    # Obtén el ticker del par XMRUSDT
+    # Obtener el precio del par XMRUSDT
     response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=XMRUSDT')
     data = response.json()
     return float(data['price'])
