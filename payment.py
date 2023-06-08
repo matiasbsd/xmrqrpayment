@@ -3,17 +3,6 @@
 # Programado por Matias Colli <matiasbsd@gmail.com>
 # Version 0.1
 # Creado el 7-06-2023
-import sys
-import smtplib
-import qrcode
-import requests
-import tempfile
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from urllib.request import urlopen
-import calendar
-from datetime import datetime
-import importlib
 
 # Dirección de Monero (XMR) para recibir los fondos
 address = "4ANUF...."
@@ -32,28 +21,40 @@ msg_cc = "zzzzzz@gmail.com"
 # Api Key de Image BB
 imagebb_apikey = "YOUR_API_KEY_IMGBB"
 
+# Cargar librerías básicas
+import sys
+import importlib
+
 # Verificar la disponibilidad de las librerías requeridas
 required_libraries = ["sys", "smtplib", "qrcode", "requests", "tempfile",
                       "email.mime.multipart", "email.mime.text",
                       "urllib.request", "calendar", "datetime"]
 missing_libraries = []
-
-for library in required_libraries:
+for lib in required_libraries:
     try:
-        importlib.import_module(library)
+        importlib.import_module(lib)
     except ImportError:
-        missing_libraries.append(library)
+        missing_libraries.append(lib)
 
-# Mostrar las librerías faltantes y sugerir cómo instalarlas
 if missing_libraries:
     print("Las siguientes librerías son requeridas pero no están instaladas:")
-    for library in missing_libraries:
-        print(library)
-        print(f"Para instalar, ejecuta: pip install {library}")
+    for lib in missing_libraries:
+        print(f"{lib}")
+        print(f"Para instalar, ejecuta: pip install {lib}")
     print("Abortando la ejecución del script.")
-    exit(1)
+    sys.exit(1)
+import smtplib
+import qrcode
+import requests
+import tempfile
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from urllib.request import urlopen
+import calendar
+from datetime import datetime
 
 def has_internet_connection():
+    # Verificar conexion a Binance e ImageBB
     try:
         response_binance = requests.get('https://api.binance.com', timeout=1)
         response_imgbb = requests.get('https://api.imgbb.com', timeout=1)
