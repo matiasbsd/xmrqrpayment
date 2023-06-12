@@ -5,6 +5,7 @@ Programado por Matias Colli <matiasbsd@gmail.com>
 1. Tomará como parámetro el monto en pesos argentinos y obtendrá de la API de Binance la cotización actual.
 2. Generará un código QR mediante la API de ImageBB .
 3. Enviará en formato HTML via mail el código QR generado en forma de ticket de pago.
+4. Enviará un enlace para pagao alternativo en BTC que se convertirán a XMR a través de Trocador.app
 
 Ejecución:
 
