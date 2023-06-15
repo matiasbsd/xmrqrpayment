@@ -22,7 +22,8 @@ La imagen del QR se cargó correctamente en ImgBB.<br>
 El correo se envió correctamente.<br>
 
 <h2>Una muestra de un correo enviado con el script:</h2>
-![image](https://github.com/matiasbsd/xmrqrpayment/assets/135914624/437ac0df-a327-4daa-a064-5fe6f3c95f60)
+
+![image](https://github.com/matiasbsd/xmrqrpayment/assets/135914624/81067c5e-e72e-4480-b589-75bd877bf0e4)
 
 <h2>Apoyame con un cafecito si querés</h2>
 Si te gusta y me querés apoyar, enviamos unos piconeros a esta dirección de XMR:
