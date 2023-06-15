@@ -194,7 +194,7 @@ message["Subject"] = msg_subject
 html_content = f"""
 <html>
   <body>
-    <table style="border: 2px solid black; background-color: orange; color: white; padding: 20px; font-family: 'Open Sans', sans-serif;">
+    <table style="border: 2px solid black; background: linear-gradient(to bottom, #ff6600 0%, #ff9933 100%); color: white; padding: 20px; font-family: 'Open Sans', sans-serif;">
       <tr>
         <td>
           <center><h2>Ticket de pago en XMR</h2>
@@ -212,6 +212,7 @@ html_content = f"""
           <p>Cotización del USDT (dolar digital): $ {usdt_price} (Binance)</p>
           <p>Cotización del XMR (dolar): u$s {xmr_price} (Binance)</p>
           <p>Cotización del XMR (pesos): $ {xmrars_price} (Binance)</p>
+          <p><a href="https://trocador.app/anonpay/?ticker_to=xmr&network_to=Mainnet&address={address}&fiat_equiv=ARS&amount={amount_ars}&name=Pago+en+BTC&{nombre_mes_anterior}&email={msg_cc}">Link alternativo para pago en BTC</a></p>
         </td>
       </tr>
     </table>
