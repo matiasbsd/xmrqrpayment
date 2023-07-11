@@ -3,13 +3,14 @@
 <h2>XMR QR PAYMENT</h2>
 
 Script para generar un código de pago QR en Monero y enviarlo via correo.
+Se le debe pasar como parámetro el importe a convertir en XMR, que si no se especifica es en pesos argentinos (también se puede poner dolares y euros).
 
-Programado por Matias Colli <matiasbsd@gmail.com>
+Programado por Matias Colli <matiasbsd en gmail dot com>
 
-1. Tomará como parámetro el monto en pesos argentinos y obtendrá de la API de Binance la cotización actual.
-2. Generará un código QR mediante la API de ImageBB .
+1. Tomará como parámetro el monto en pesos argentinos (por defecto, aunque se puede especificar euros o dolares) y obtendrá de la API de Binance la cotización actual.
+2. Generará un código QR mediante la API de ImageBB.
 3. Enviará en formato HTML via mail el código QR generado en forma de ticket de pago.
-4. Enviará un enlace para pagao alternativo en BTC que se convertirán a XMR a través de Trocador.app
+4. Enviará un enlace para pagao alternativo en BTC que se convertirán a XMR a través de Trocador.app.
 
 <h2>Ejecución:</h2>
 
