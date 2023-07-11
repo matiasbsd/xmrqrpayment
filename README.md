@@ -9,17 +9,16 @@ Programado por Matias Colli <matiasbsd@gmail.com>
 
 <h2>Ejecución:</h2>
 
-![image](https://github.com/matiasbsd/xmrqrpayment/assets/135914624/70c95378-6de8-405c-89da-7fb2fcc6802f)
+![image](https://github.com/matiasbsd/xmrqrpayment/assets/135914624/29e946e7-bd98-44ca-bd12-05a38154ba6a)
+
 
 <h2>Muestra en texto: </h2>
 
 <b>$ ./payment.py 40000</b><br>
-El precio de XMR hoy es $69451.2<br>
-La cantidad de XMR a transferir son 0.575944<br>
-Pago en XMR de mayo<br>
-07-06-2023<br>
-La imagen del QR se cargó correctamente en ImgBB.<br>
-El correo se envió correctamente.<br>
+Obteniendo precios de Internet...[OK]<br>
+Obteniendo el mes pasado...[OK]<br>
+Cargando código QR desde ImgBB...[OK]<br>
+Enviando correo...[OK]<br>
 
 <h2>Una muestra de un correo enviado con el script:</h2>
 
