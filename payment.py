@@ -1,9 +1,9 @@
 # Tomará como parámetro el monto en pesos y obtendrá de la API de Binance la cotización actual
 # Generará un código QR mediante la API de ImageBB y creará un ticket que enviará en formato HTML via mail
 # Programado por Matias Colli <matiasbsd@gmail.com>
-# Version 0.2
+# Version 0.3
 # Creado el 7-06-2023
-# Actualizado el 11-06-2023
+# Actualizado el 10-07-2023
 
 ########################## DATOS PERSONALES #############################
 # Dirección de Monero (XMR) para recibir los fondos
