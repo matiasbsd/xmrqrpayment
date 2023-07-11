@@ -55,8 +55,8 @@ from urllib.request import urlopen
 import calendar
 from datetime import datetime
 
+# Verificar conexion a Binance e ImageBB
 def has_internet_connection():
-    # Verificar conexion a Binance e ImageBB
     try:
         response_binance = requests.get('https://api.binance.com', timeout=1)
         response_imgbb = requests.get('https://api.imgbb.com', timeout=1)
@@ -93,12 +93,56 @@ def xmrusdt_price():
     data = response.json()
     return float(data['price'])
 
-# Verificar si se proporciona un monto personalizado como argumento
-if len(sys.argv) > 1:
-    if sys.argv[1].isdigit():
-        amount_ars = float(sys.argv[1])
+# Obtener el precio del par XMRUSD
+def xmrusd_price():
+    response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=XMRUSDT')
+    data = response.json()
+    return float(data['price'])
+
+# Obtener el precio del par EURUSD
+def eurusd_price():
+    response = requests.get('https://api.binance.com/api/v3/ticker/price?symbol=EURUSDT')
+    data = response.json()
+    return float(data['price'])
+
+# Obtener el precio del par XMREUR
+def xmreur_price():
+    xmrusd = xmrusd_price()
+    eurusd = eurusd_price()
+    xmreur = xmrusd / eurusd
+    return xmreur
+
+# Convertir el monto en pesos a XMR
+def convert_to_xmr(amount, currency):
+    if currency == "usd":
+        xmrusd = xmrusd_price()
+        xmramount = amount / xmrusd
+    elif currency == "eur":
+        xmreur = xmreur_price()
+        xmramount = amount / xmreur
     else:
-        print("El parámetro no es un número válido")
+        xmramount = convert_ars_to_xmr(amount)
+    return xmramount
+
+# Verificar si se proporciona un monto y una moneda personalizada como argumento
+if len(sys.argv) > 1:
+    if sys.argv[1].isdigit() and float(sys.argv[1]) > 0:
+        amount = float(sys.argv[1])
+        if len(sys.argv) > 2:
+            currency = sys.argv[2].lower()
+            if currency not in ["eur", "usd", "ars"]:
+                print("La moneda debe ser 'eur', 'usd' o 'ars'.")
+                exit(1)
+        else:
+            currency = "ars"
+    else:
+        print("El primer parámetro debe ser un número válido mayor a 0.")
+        exit(1)
+else:
+    amount = float(input("Ingrese el monto: "))
+    currency = input("Ingrese la moneda (eur/usd/ars): ").lower()
+    if currency not in ["eur", "usd", "ars"]:
+        print("La moneda debe ser 'eur', 'usd' o 'ars'.")
         exit(1)
 
 # Verificar la conexión a Internet
@@ -107,24 +151,24 @@ if not has_internet_connection():
     sys.exit(1)
 
 # Comienzo de ejecución del programa
+print("Obteniendo precios de Internet...", end="")
+if currency != "ars":
+    xmramount = convert_to_xmr(amount, currency)
+else:
+    xmramount = convert_to_xmr(amount, "ars")  # Actualizado aquí
+
+# Comienzo de ejecución del programa
 usdt_price = usdtars_price()
 xmr_price = xmrusdt_price()
 xmrars_price = (usdt_price * xmr_price)
-
-# Imprimir en pantalla el precio actual de XMR
-print("El precio de XMR hoy es $" + str(round(xmrars_price, 2)))
-
-# Convertir el monto en pesos a XMR
-xmramount = convert_ars_to_xmr(amount_ars)
-print("La cantidad de XMR a transferir son " + str(round(xmramount, 6)))
+print("[OK]")
 
 # Obtener el mes actual
+print("Obteniendo el mes pasado...", end="")
 current_month = datetime.now().month
-
 # Obtener el nombre del mes anterior en inglés
 previous_month = current_month - 1 if current_month > 1 else 12
 english_month_name = calendar.month_name[previous_month]
-
 # Traducir el nombre del mes anterior al español
 meses_espanol = {
     "January": "enero",
@@ -141,16 +185,16 @@ meses_espanol = {
     "December": "diciembre"
 }
 nombre_mes_anterior = meses_espanol[english_month_name]
+print("[OK]")
 
 # Configurar el asunto personalizado
 msg_subject = f"Pago en XMR de {nombre_mes_anterior}"
-print(msg_subject)
 
 # Obtener la fecha actual
 current_date = datetime.now().strftime("%d-%m-%Y")
-print(current_date)
 
 # Crear los datos para el código QR
+print("Cargando código QR desde ImgBB...", end="")
 qr_data = f"monero:{address}?tx_amount={xmramount}"
 
 # Crear el código QR
@@ -179,11 +223,12 @@ with tempfile.NamedTemporaryFile(suffix=".png") as qr_file:
         json_data = response.json()
         if response.status_code == 200 and "data" in json_data and "url" in json_data["data"]:
             qr_image_url = json_data["data"]["url"]
-            print("La imagen del QR se cargó correctamente en ImgBB.")
+            print("[OK]")
         else:
             print("Error al cargar la imagen del QR en ImgBB.")
 
 # Crear mensaje de correo electrónico
+print("Enviando correo...", end="")
 message = MIMEMultipart("alternative")
 message["From"] = msg_from
 message["To"] = msg_to
@@ -208,11 +253,12 @@ html_content = f"""
           <hr>
           <p>Mes trabajado: {nombre_mes_anterior}</p>
           <p>Fecha de emisión: {current_date}</p>
-          <p>Importe en pesos: $ {amount_ars} (de acuerdo a las horas trabajadas)</p>
-          <p>Cotización del USDT (dolar digital): $ {usdt_price} (Binance)</p>
+          <p>Importe en {currency}: {amount} (de acuerdo a las horas trabajadas)</p>
+          <p>Cotización del USDT (pesos): $ {usdt_price} (Binance)</p>
           <p>Cotización del XMR (dolar): u$s {xmr_price} (Binance)</p>
           <p>Cotización del XMR (pesos): $ {xmrars_price} (Binance)</p>
-          <p><a href="https://trocador.app/anonpay/?ticker_to=xmr&network_to=Mainnet&address={address}&fiat_equiv=ARS&amount={amount_ars}&name=Pago+en+BTC&{nombre_mes_anterior}&email={msg_cc}" style="background-color: orange;color: white;padding: 6px 12px;text-decoration: none;border: 1px solid transparent;display: inline-block;border-radius: 4px;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;">Link alternativo para pago en BTC</a></p>        </td>
+          <p><a href="https://trocador.app/anonpay/?ticker_to=xmr&network_to=Mainnet&address={address}&fiat_equiv=ARS&amount={xmramount}&name=Pago+en+BTC&{nombre_mes_anterior}&email={msg_cc}" style="background-color: orange;color: white;padding: 6px 12px;text-decoration: none;border: 1px solid transparent;display: inline-block;border-radius: 4px;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;">Link alternativo para pago en BTC</a></p>
+        </td>
       </tr>
     </table>
   </body>
@@ -229,8 +275,7 @@ try:
     server.login(smtp_user, smtp_password)
     server.send_message(message)
     server.quit()
-
-    print("El correo se envió correctamente.")
+    print("[OK]")
 except smtplib.SMTPException as e:
     print("Error al enviar el correo:")
     print(e)
