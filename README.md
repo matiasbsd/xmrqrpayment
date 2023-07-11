@@ -1,3 +1,7 @@
+
+<h1>XMRQRPAYMENT</h1>
+<h2>XMR QR PAYMENT</h2>
+
 Script para generar un código de pago QR en Monero y enviarlo via correo.
 
 Programado por Matias Colli <matiasbsd@gmail.com>
