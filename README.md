@@ -20,6 +20,24 @@ Obteniendo el mes pasado...[OK]<br>
 Cargando código QR desde ImgBB...[OK]<br>
 Enviando correo...[OK]<br>
 
+<b>$ ./payment.py 150 eur</b><br>
+Obteniendo precios de Internet...[OK]<br>
+Obteniendo el mes pasado...[OK]<br>
+Cargando código QR desde ImgBB...[OK]<br>
+Enviando correo...[OK]<br>
+
+<b>$ ./payment.py 100 usd</b><br>
+Obteniendo precios de Internet...[OK]<br>
+Obteniendo el mes pasado...[OK]<br>
+Cargando código QR desde ImgBB...[OK]<br>
+Enviando correo...[OK]<br>
+
+<b>$ ./payment.py asdasd eur</b><br>
+El primer parámetro debe ser un número válido mayor a 0.<br>
+
+<b>$ ./payment.py 134 zzz</b><br>
+La moneda debe ser 'eur', 'usd' o 'ars'.<br>
+
 <h2>Una muestra de un correo enviado con el script:</h2>
 
 ![image](https://github.com/matiasbsd/xmrqrpayment/assets/135914624/81067c5e-e72e-4480-b589-75bd877bf0e4)
