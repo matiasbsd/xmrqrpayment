@@ -132,23 +132,23 @@ if len(sys.argv) > 1:
             currency = sys.argv[2].lower()
             if currency not in ["eur", "usd", "ars"]:
                 print("La moneda debe ser 'eur', 'usd' o 'ars'.")
-                print(f"uso: ./sys.argv[0] <importe> <moneda>")
-                print(f"ejemplo: ./sys.argv[0] 40000 ars")
+                rint(f"uso: {sys.argv[0]} <importe> <moneda>")
+                print(f"ejemplo: {sys.argv[0]} 40000 ars")
                 exit(1)
         else:
             currency = "ars"
     else:
         print("El primer parámetro debe ser un número válido mayor a 0.")
-        print(f"uso: ./sys.argv[0] <importe> <moneda>")
-        print(f"ejemplo: ./sys.argv[0] 40000 ars")
+        print(f"uso: {sys.argv[0]} <importe> <moneda>")
+        print(f"ejemplo: {sys.argv[0]} 40000 ars")
         exit(1)
 else:
     amount = float(input("Ingrese el monto: "))
     currency = input("Ingrese la moneda (eur/usd/ars): ").lower()
     if currency not in ["eur", "usd", "ars"]:
         print("La moneda debe ser 'eur', 'usd' o 'ars'.")
-        print(f"uso: ./sys.argv[0] <importe> <moneda>")
-        print(f"ejemplo: ./sys.argv[0] 40000 ars")
+        print(f"uso: {sys.argv[0]} <importe> <moneda>")
+        print(f"ejemplo: {sys.argv[0]} 40000 ars")
         exit(1)
 
 # Verificar la conexión a Internet
