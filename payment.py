@@ -201,7 +201,7 @@ current_date = datetime.now().strftime("%d-%m-%Y")
 
 # Crear los datos para el código QR
 print("Cargando código QR desde ImgBB...", end="")
-qr_data = f"monero:{address}?tx_amount={xmramount}"
+qr_data = f"monero:{address}?tx_description={nombre_mes_anterior}?tx_amount={xmramount}"
 
 # Crear el código QR
 qr_img = qrcode.make(qr_data)
