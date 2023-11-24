@@ -166,7 +166,7 @@ else:
 # Comienzo de ejecución del programa
 usdt_price = usdtars_price()
 xmr_price = xmrusdt_price()
-xmrars_price = (usdt_price * xmr_price)
+xmrars_price = round(usdt_price * xmr_price, 2)
 print("[OK]")
 
 # Obtener el mes actual
