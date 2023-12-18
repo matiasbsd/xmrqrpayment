@@ -263,7 +263,7 @@ html_content = f"""
           <p>Cotización del USDT (pesos): $ {usdt_price} (Binance)</p>
           <p>Cotización del XMR (dolar): u$s {xmr_price} (Binance)</p>
           <p>Cotización del XMR (pesos): $ {xmrars_price} (Binance)</p>
-          <p><a href="https://trocador.app/anonpay/?ticker_to=xmr&network_to=Mainnet&address={address}&fiat_equiv=ARS&amount={xmramount}&name=Pago+en+BTC&{nombre_mes_anterior}&email={msg_cc}" style="background-color: orange;color: white;padding: 6px 12px;text-decoration: none;border: 1px solid transparent;display: inline-block;border-radius: 4px;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;">Link alternativo para pago en BTC</a></p>
+          <p><a href="https://trocador.app/anonpay/?ticker_to=xmr&network_to=Mainnet&address={address}&amount={xmramount}&name=Pago+en+BTC&{nombre_mes_anterior}&email={msg_cc}" style="background-color: orange;color: white;padding: 6px 12px;text-decoration: none;border: 1px solid transparent;display: inline-block;border-radius: 4px;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;">Link alternativo para pago en BTC</a></p>
         </td>
       </tr>
     </table>
